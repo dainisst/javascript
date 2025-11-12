@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Exc</title>
+</head>
+
+<body>
+  <p class="title">YouTube Subscribe Button</p>
+  <button id="subscribe-button" onclick="subscribe()">Subscribe</button>
+  <p class="title">Rock Paper Scissors</p>
+  <a href="tiktaktoe.html">Click here</a>
+  <p class="title">Amazon Shipping Calculator</p>
+  <p>Orders under $40=+$10 shipping.</p>
+  <p>Orders over $40=Free shipping.</p>
+  <p>
+    <input placeholder="Enter Order sum" id="js-input-sum" onkeydown="inputKeyDown(event)">
+    <button onclick="calculateTotal()">Calculate</button>
+  </p>
+  <p id="js-calculate-result"></p>
+
+
+  <script>
+    function subscribe() {
+      document.getElementById("subscribe-button").textContent = "SubscribeD";
+    }
+
+    function calculateTotal() {
+      const inputElement = document.getElementById('js-input-sum');
+      const inputValue = Number(inputElement.value);
+      let cost = 0;
+      if (inputValue < 40) {
+        cost = inputValue + 10;
+      } else {
+        cost = inputValue;
+      }
+      document.getElementById("js-calculate-result").innerHTML = cost;
+    }
+
+    function inputKeyDown(event) {
+      const key = event.key;
+      if (key === 'Enter') {
+        calculateTotal();
+      } else if (key === 'Escape') {
+        document.getElementById("js-input-sum").value = '';
+      }
+    }
+
+  </script>
+</body>
+
+</html>
