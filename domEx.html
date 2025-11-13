@@ -5,30 +5,76 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DOM Exc</title>
+  <style>
+    body {
+      font-family: Arial;
+    }
+
+    .subscribe-button {
+      border: none;
+      background-color: black;
+      color: white;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-right: 15px;
+      padding-left: 15px;
+      font-weight: bold;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-bottom: 30px;
+    }
+
+    .is-subscribed {
+      background-color: rgb(240, 240, 240);
+      color: black;
+    }
+
+    .cost-input {
+      font-size: 15px;
+      padding: 10px;
+    }
+
+    .calculate-button {
+      background-color: green;
+      color: white;
+      border: none;
+      font-size: 15px;
+      padding: 12px 15px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
   <p class="title">YouTube Subscribe Button</p>
-  <button id="subscribe-button" onclick="subscribe()">Subscribe</button>
+  <button class="subscribe-button" onclick="subscribe()">Subscribe</button>
   <p class="title">Rock Paper Scissors</p>
-  <a href="tiktaktoe.html">Click here</a>
+  <a href="rockpaper.html">Click here</a>
   <p class="title">Amazon Shipping Calculator</p>
   <p>Orders under $40=+$10 shipping.</p>
   <p>Orders over $40=Free shipping.</p>
   <p>
-    <input placeholder="Enter Order sum" id="js-input-sum" onkeydown="inputKeyDown(event)">
-    <button onclick="calculateTotal()">Calculate</button>
+    <input placeholder="Enter Order sum" class="js-input-sum cost-input" onkeydown="inputKeyDown(event)">
+    <button onclick="calculateTotal()" class="calculate-button">Calculate</button>
   </p>
-  <p id="js-calculate-result"></p>
+  <p class="js-calculate-result"></p>
 
 
   <script>
     function subscribe() {
-      document.getElementById("subscribe-button").textContent = "SubscribeD";
+      const buttonElement = document.querySelector(".subscribe-button");
+
+      if (buttonElement.innerHTML === 'Subscribe') {
+        buttonElement.innerHTML = 'SubscribeD';
+        buttonElement.classList.add('is-subscribed');
+      } else {
+        buttonElement.innerHTML = 'Subscribe';
+        buttonElement.classList.remove('is-subscribed');
+      }
     }
 
     function calculateTotal() {
-      const inputElement = document.getElementById('js-input-sum');
+      const inputElement = document.querySelector(".js-input-sum");
       const inputValue = Number(inputElement.value);
       let cost = 0;
       if (inputValue < 40) {
@@ -36,7 +82,7 @@
       } else {
         cost = inputValue;
       }
-      document.getElementById("js-calculate-result").innerHTML = cost;
+      document.querySelector(".js-calculate-result").innerHTML = cost;
     }
 
     function inputKeyDown(event) {
@@ -44,7 +90,7 @@
       if (key === 'Enter') {
         calculateTotal();
       } else if (key === 'Escape') {
-        document.getElementById("js-input-sum").value = '';
+        document.querySelector(".js-input-sum").value = '';
       }
     }
 
