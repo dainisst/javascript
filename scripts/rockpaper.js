@@ -42,14 +42,15 @@ function resetScore() {
     ties: 0,
   };
   updateScoreboard();
-  document.getElementById("win-lose").textContent = "";
+  document.getElementById("win-loose").textContent = "";
   document.getElementById("moves").textContent = "";
   localStorage.removeItem('score');
 }
 
 function showResult(result, playerMove, computerMove) {
-  document.getElementById("win-lose").textContent = result;
-  document.getElementById("moves").textContent = `Your move: ${playerMove}, Computer move: ${computerMove}`;
+  document.getElementById("win-loose").textContent = result;
+
+  document.getElementById("moves").innerHTML = `You <img src="images/${playerMove}-emoji.png" class="move-icon"><img src="images/${computerMove}-emoji.png" class="move-icon"> Computer`;
 }
 
 function updateScoreboard() {
