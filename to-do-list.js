@@ -21,7 +21,7 @@ function renderTasks() {
                 ${todo} 
                 <button button class="delete-button" onClick="
                    toDoList.splice(${i}, 1);
-                   renderTask();                    
+                   renderTasks();                    
                 ">Delete</button>                    
             </p>`;
         taskHtml += html;
