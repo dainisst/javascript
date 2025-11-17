@@ -1,22 +1,32 @@
 const toDoList = [];
 
 function addTask() {
-    const inputElement = document.querySelector('#taskInput');
+    const inputElement = document.querySelector('.task-input');
     const name = inputElement.value;
 
-    toDoList.push(name); 
+    toDoList.push(name);
     inputElement.value = '';
-    renderTasks();       
+    renderTasks();
     console.log(toDoList);
 }
+
 
 function renderTasks() {
     let taskHtml = '';
 
     for (let i = 0; i < toDoList.length; i++) {
-        const task = toDoList[i];
-        taskHtml += `<li>${task}</li>`;
+        const todo = toDoList[i];
+        const html =
+            `<p>
+                ${todo} 
+                <button button class="delete-button" onClick="
+                   toDoList.splice(${i}, 1);
+                   renderTask();                    
+                ">Delete</button>                    
+            </p>`;
+        taskHtml += html;
     }
 
     document.querySelector('.task-list').innerHTML = taskHtml;
+    console.log(taskHtml);
 }
