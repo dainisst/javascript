@@ -1,11 +1,20 @@
 const toDoList = [];
 
 function addTask() {
-    const inputElement = document.querySelector('.task-input');
-    const name = inputElement.value;
+    const inputName = document.querySelector('.task-name');
+    const inputDate = document.querySelector('.task-date');
+    const name = inputName.value;
+    const dueDate = inputDate.value;
 
-    toDoList.push(name);
-    inputElement.value = '';
+    toDoList.push({
+        // name: name,
+        // dueDate: dueDate
+        name,
+        dueDate
+    });
+
+    inputName.value = '';
+    inputDate.value = '';
     renderTasks();
     console.log(toDoList);
 }
@@ -15,10 +24,14 @@ function renderTasks() {
     let taskHtml = '';
 
     for (let i = 0; i < toDoList.length; i++) {
-        const todo = toDoList[i];
+        const todoObject = toDoList[i];
+        // const name = todoObject.name;
+        // const dueDate = todoObject.dueDate;
+        const { name, dueDate } = todoObject;
+
         const html =
             `<p>
-                ${todo} 
+                ${name} ${dueDate}
                 <button button class="delete-button" onClick="
                    toDoList.splice(${i}, 1);
                    renderTasks();                    
