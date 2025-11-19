@@ -29,17 +29,17 @@ function renderTasks() {
         // const dueDate = todoObject.dueDate;
         const { name, dueDate } = todoObject;
 
-        const html =
-            `<p>
-                ${name} ${dueDate}
-                <button button class="delete-button" onClick="
-                   toDoList.splice(${i}, 1);
-                   renderTasks();                    
-                ">Delete</button>                    
-            </p>`;
+        const html = `
+            <div>${name}</div>
+            <div>${dueDate}</div>
+            <button button class="delete-button" onClick="
+                toDoList.splice(${i}, 1);
+                renderTasks();                    
+            ">Delete</button>                    
+            `;
         taskHtml += html;
     }
 
-    document.querySelector('.task-list').innerHTML = taskHtml;
+    document.querySelector('.todo-grid').innerHTML = taskHtml;
     console.log(taskHtml);
 }
