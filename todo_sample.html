@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App with Local Storage</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    input,
+    button {
+      padding: 10px;
+      margin: 5px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      background: #f4f4f4;
+      margin: 5px 0;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .completed {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>My Todo List</h1>
+
+  <div>
+    <input type="text" id="todoInput" placeholder="Add a new task">
+    <button onclick="addTodo()">Add Todo</button>
+  </div>
+
+  <ul id="todoList"></ul>
+
+  <script>
+    // Load todos when page loads
+    document.addEventListener('DOMContentLoaded', loadTodos);
+
+    // Function to add a new todo
+    function addTodo() {
+      const input = document.getElementById('todoInput');
+      const todoText = input.value.trim();
+
+      if (todoText === '') {
+        alert('Please enter a task!');
+        return;
+      }
+
+      // Create todo object
+      const todo = {
+        id: Date.now(), // Unique ID based on timestamp
+        text: todoText,
+        completed: false
+      };
+
+      // Get existing todos from localStorage
+      let todos = getTodosFromStorage();
+
+      // Add new todo
+      todos.push(todo);
+
+      // Save back to localStorage
+      saveTodosToStorage(todos);
+
+      // Clear input
+      input.value = '';
+
+      // Refresh the list
+      displayTodos();
+    }
+
+    // Function to get todos from localStorage
+    function getTodosFromStorage() {
+      // Get the todos from localStorage
+      const todosJSON = localStorage.getItem('todos');
+
+      // If there are no todos, return empty array
+      if (todosJSON === null) {
+        return [];
+      }
+
+      // Convert from JSON string to JavaScript array
+      return JSON.parse(todosJSON);
+    }
+
+    // Function to save todos to localStorage
+    function saveTodosToStorage(todos) {
+      // Convert array to JSON string and save to localStorage
+      localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
+    // Function to display todos
+    function displayTodos() {
+      const todoList = document.getElementById('todoList');
+      const todos = getTodosFromStorage();
+
+      // Clear the list
+      todoList.innerHTML = '';
+
+      // Add each todo to the list
+      todos.forEach(todo => {
+        const li = document.createElement('li');
+
+        // Add completed class if todo is completed
+        if (todo.completed) {
+          li.classList.add('completed');
+        }
+
+        li.innerHTML = `
+                    <span onclick="toggleTodo(${todo.id})">${todo.text}</span>
+                    <button onclick="deleteTodo(${todo.id})">Delete</button>
+                `;
+
+        todoList.appendChild(li);
+      });
+    }
+
+    // Function to toggle todo completion
+    function toggleTodo(id) {
+      let todos = getTodosFromStorage();
+
+      // Find the todo and toggle its completed status
+      todos = todos.map(todo => {
+        if (todo.id === id) {
+          return { ...todo, completed: !todo.completed };
+        }
+        return todo;
+      });
+
+      // Save updated todos
+      saveTodosToStorage(todos);
+
+      // Refresh the list
+      displayTodos();
+    }
+
+    // Function to delete a todo
+    function deleteTodo(id) {
+      let todos = getTodosFromStorage();
+
+      // Filter out the todo with the matching ID
+      todos = todos.filter(todo => todo.id !== id);
+
+      // Save updated todos
+      saveTodosToStorage(todos);
+
+      // Refresh the list
+      displayTodos();
+    }
+
+    // Function to load todos when page loads
+    function loadTodos() {
+      displayTodos();
+    }
+  </script>
+</body>
+
+</html>

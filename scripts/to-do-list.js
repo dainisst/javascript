@@ -34,6 +34,7 @@ function renderTasks() {
             <div>${dueDate}</div>
             <button button class="delete-button" onClick="
                 toDoList.splice(${i}, 1);
+                // localStorage.setItem('list', JSON.stringify(toDoList));
                 renderTasks();                    
             ">Delete</button>                    
             `;
@@ -43,3 +44,4 @@ function renderTasks() {
     document.querySelector('.todo-grid').innerHTML = taskHtml;
     console.log(taskHtml);
 }
+
