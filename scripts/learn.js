@@ -12,10 +12,11 @@
 //   console.log('stopped');
 // }, 5000);
 
-const array = ['viens', 'divi', 'trīs', 'četri', 'pieci'];
+// const array = ['viens', 'divi', 'trīs', 'četri', 'pieci'];
 
-array.forEach((item, i) => {
-  setTimeout(() => {
-    console.log(item);
-  }, 2000 * i);
-});
+// array.forEach((item, i) => {
+//   setTimeout(() => {
+//     console.log(item);
+//   }, 2000 * i);
+// });
+
