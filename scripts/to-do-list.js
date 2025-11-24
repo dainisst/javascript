@@ -1,5 +1,10 @@
 const toDoList = [];
 
+document.querySelector('.js-addtask-button')
+    .addEventListener('click', () => {
+        addTask();
+    })
+
 function addTask() {
     const inputName = document.querySelector('.task-name');
     const inputDate = document.querySelector('.task-date');
@@ -27,9 +32,7 @@ function renderTasks() {
         const html = `
             <div>${name}</div>
             <div>${dueDate}</div>
-            <button button class="delete-button" onClick="
-                toDoList.splice(${index}, 1);                
-                renderTasks();                    
+            <button button class="delete-button js-todo-delete-button"                    
             ">Delete</button>                    
             `;
         taskHtml += html;
@@ -37,5 +40,13 @@ function renderTasks() {
 
     document.querySelector('.todo-grid').innerHTML = taskHtml;
     console.log(taskHtml);
+
+    document.querySelectorAll('.js-todo-delete-button')
+        .foreach((deleteButton, index) => {
+            deleteButton.addEventListener('click', () => {
+                toDoList.splice(index, 1);
+                renderTasks();
+            });
+        });
 }
 

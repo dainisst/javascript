@@ -20,3 +20,11 @@
 //   }, 2000 * i);
 // });
 
+const arr = [1, -3, 5];
+
+console.log(arr.filter((value, index) => {
+  return value > 0;
+}));
+
+console.log(arr.map(value =>
+  value * 2));
